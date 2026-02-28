@@ -95,3 +95,34 @@ To learn more about React Native, take a look at the following resources:
 - [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
 - [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
 - [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+
+## Added login/navigation example
+
+This repository was extended with a very small authentication flow using React
+Navigation.  You will find two new screens under `src/screens` (`LoginScreen` and
+`HomeScreen`) and the navigator configuration in `src/navigation/AppNavigator.tsx`.
+
+Additionally, a **Farmer Onboarding** screen (`src/screens/FarmerOnboardingScreen.tsx`)
+has been added. After logging in the app now takes the user through this onboarding
+placeholder before reaching the home screen. The onboarding component simply shows
+a message and a button to complete the flow; you can replace it with actual
+steps as needed. The current onboarding screen includes form fields corresponding
+to the `farmers` database table (email, first/last name, DOB, gender, address,
+city/state/postal code, country, etc.) so it’s ready to be wired to the backend
+profile API.
+
+To use the new code you need to install a few additional packages and (on iOS)
+run CocoaPods:
+
+```bash
+cd agriapp
+yarn add @react-navigation/native @react-navigation/native-stack react-native-screens react-native-safe-area-context
+cd ios && bundle exec pod install && cd ..
+```
+
+Start the app as usual (`yarn ios` / `yarn android`) and you should be greeted
+by the login form. Enter any non‑empty email/password to advance to the home
+screen, or tap "Log out" to return.
+
+This trivial example can serve as a starting point for more complex navigation
+and authentication logic.
