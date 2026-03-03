@@ -31,13 +31,21 @@ const FarmerOnboardingScreen: React.FC<Props> = ({navigation}) => {
   // static screen - no network
 
   const handleComplete = () => {
-    // simply navigate to home; form is static
-    navigation.replace('Home');
+    // simply navigate to main app
+    navigation.navigate('MainApp' as any);
   };
 
   return (
     <ScrollView contentContainerStyle={styles.container} keyboardShouldPersistTaps="handled">
-      <Text style={styles.title}>Farmer Onboarding</Text>
+      <View style={styles.header}>
+        <TouchableOpacity
+          style={styles.backButton}
+          onPress={() => navigation.goBack()}>
+          <Text style={styles.backIcon}>←</Text>
+        </TouchableOpacity>
+        <Text style={styles.title}>Farmer Onboarding</Text>
+        <View style={{width: 40}} />
+      </View>
       {/* description/subheader removed */}
 
       <TextInput
@@ -162,6 +170,27 @@ const styles = StyleSheet.create({
   },
   buttonDisabled: {
     opacity: 0.6,
+  },
+  header: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingHorizontal: 16,
+    paddingVertical: 12,
+    backgroundColor: '#f8f9fa',
+    borderBottomWidth: 1,
+    borderBottomColor: '#e0e0e0',
+    marginBottom: 16,
+  },
+  backButton: {
+    width: 40,
+    height: 40,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  backIcon: {
+    fontSize: 28,
+    color: '#3478f6',
   },
 });
 

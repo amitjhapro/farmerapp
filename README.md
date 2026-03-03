@@ -66,7 +66,7 @@ This is one way to run your app — you can also build it directly from Android 
 
 Now that you have successfully run the app, let's make changes!
 
-Open `App.tsx` in your text editor of choice and make some changes. When you save, your app will automatically update and reflect these changes — this is powered by [Fast Refresh](https://reactnative.dev/docs/fast-refresh).
+Open `App.tsx` in your text editor of choice and make some changes. When you save, your app will automatically update and reflect these changes — this is powered by [Fast Refresh](https://reactnative.dev/docs/fast-refresh).
 
 When you want to forcefully reload, for example to reset the state of your app, you can perform a full reload:
 
@@ -96,33 +96,45 @@ To learn more about React Native, take a look at the following resources:
 - [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
 - [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
 
-## Added login/navigation example
+## Navigation System
 
-This repository was extended with a very small authentication flow using React
-Navigation.  You will find two new screens under `src/screens` (`LoginScreen` and
-`HomeScreen`) and the navigator configuration in `src/navigation/AppNavigator.tsx`.
+This project features a comprehensive navigation architecture with **drawer navigation (hamburger menu)** and **bottom tab navigation**.
 
-Additionally, a **Farmer Onboarding** screen (`src/screens/FarmerOnboardingScreen.tsx`)
-has been added. After logging in the app now takes the user through this onboarding
-placeholder before reaching the home screen. The onboarding component simply shows
-a message and a button to complete the flow; you can replace it with actual
-steps as needed. The current onboarding screen includes form fields corresponding
-to the `farmers` database table (email, first/last name, DOB, gender, address,
-city/state/postal code, country, etc.) so it’s ready to be wired to the backend
-profile API.
+### Architecture
 
-To use the new code you need to install a few additional packages and (on iOS)
-run CocoaPods:
+- **Stack Navigator** – Manages Login and MainApp screens at the root level.
+- **Drawer Navigator** – Hamburger menu (☰) accessible from main app screens with links to:
+  - Tabs component (Home, Profile, Settings)
+  - Farmer Onboarding screen
+- **Bottom Tab Navigator** – Quick access bar with Home (🏠), Profile (👤), and Settings (⚙️).
+
+### Installation
+
+All required navigation packages are included in `package.json`. To set up:
 
 ```bash
 cd agriapp
-yarn add @react-navigation/native @react-navigation/native-stack react-native-screens react-native-safe-area-context
+yarn install
 cd ios && bundle exec pod install && cd ..
 ```
 
-Start the app as usual (`yarn ios` / `yarn android`) and you should be greeted
-by the login form. Enter any non‑empty email/password to advance to the home
-screen, or tap "Log out" to return.
+### How to Use
 
-This trivial example can serve as a starting point for more complex navigation
-and authentication logic.
+1. **Login Screen** – Enter any email/password and tap "Sign In" to access the main app.
+2. **Hamburger Menu** – Tap the menu icon (☰) in the top-left of any main screen to open the drawer.
+3. **Navigation** – Use the drawer to jump to Onboarding or the Tabs section.
+4. **Bottom Tabs** – Switch between Home, Profile, and Settings using the bottom tab bar.
+5. **Logout** – Tap "Log Out" in the drawer footer to return to the login screen.
+
+### File Structure
+
+- `src/navigation/AppNavigator.tsx` – Root navigation combining stack, drawer, and bottom tabs.
+- `src/navigation/DrawerContent.tsx` – Custom drawer menu with header and footer.
+- `src/navigation/BottomTabNavigator.tsx` – Bottom tab bar with three main screens.
+- `src/screens/LoginScreen.tsx` – Authentication entry point.
+- `src/screens/HomeScreen.tsx` – Main home screen with drawer access.
+- `src/screens/ProfileScreen.tsx` – Placeholder for farmer profile management.
+- `src/screens/SettingsScreen.tsx` – Placeholder for app settings.
+- `src/screens/FarmerOnboardingScreen.tsx` – Onboarding form with farmer registration fields.
+
+This provides a robust, multi-level navigation pattern suitable for larger mobile applications.

@@ -23,8 +23,8 @@ const LoginScreen: React.FC<Props> = ({navigation}) => {
   const onLogin = () => {
     // simple validation; in a real app hit an API
     if (email && password) {
-      // after login, start the onboarding flow
-      navigation.replace('Onboarding');
+      // after login, navigate to main app
+      navigation.replace('MainApp');
     } else {
       Alert.alert('Validation', 'Please enter email and password');
     }
